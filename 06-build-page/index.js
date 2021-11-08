@@ -31,7 +31,7 @@ async function copyDir(src, dest) {
       if (file.isFile()) {
         await copyFile(pathFile, pathCopyFile);
       } else {
-        await copyDir(pathFile, pathCopyFile)
+        await copyDir(pathFile, pathCopyFile);
       }
     }
   } catch (err) {
@@ -48,7 +48,7 @@ async function createFileHTML() {
       const pathComponent = path.join(pathComponents, component.name);
       const templateName = path.basename(component.name, path.extname(component.name));
       if (component.isFile() && fileExtension === 'html') {
-        component = await readFile(pathComponent)
+        component = await readFile(pathComponent);
         template = template.replace(`{{${templateName}}}`, component);
       }
     }
@@ -60,16 +60,16 @@ async function createFileHTML() {
 
 async function createFileStyle() {
   try {
-  const files = await readdir(pathStyles, {withFileTypes: true});
-  const output = fs.createWriteStream(pathProjectStyle);
-  for (const file of files) {
-    const fileExtension = path.extname(file.name).slice(1);
-    if (file.isFile() && fileExtension === 'css') {
+    const files = await readdir(pathStyles, {withFileTypes: true});
+    const output = fs.createWriteStream(pathProjectStyle);
+    for (const file of files) {
+      const fileExtension = path.extname(file.name).slice(1);
+      if (file.isFile() && fileExtension === 'css') {
         const pathInput = path.join(pathStyles, file.name);
         const input = fs.createReadStream(pathInput);
         input.pipe(output);
+      }
     }
-  }
   } catch (err) {
     console.log(err);
   }

@@ -8,15 +8,15 @@ const output = fs.createWriteStream(pathOutput);
 
 async function createBundle() {
   try {
-  const files = await readdir(pathDir, {withFileTypes: true});
-  for (const file of files) {
-    const fileExtension = path.extname(file.name).slice(1);
-    if (file.isFile() && fileExtension === 'css') {
+    const files = await readdir(pathDir, {withFileTypes: true});
+    for (const file of files) {
+      const fileExtension = path.extname(file.name).slice(1);
+      if (file.isFile() && fileExtension === 'css') {
         const pathInput = path.join(pathDir, file.name);
         const input = fs.createReadStream(pathInput);
         input.pipe(output);
+      }
     }
-  }
   } catch (err) {
     console.log(err);
   }
