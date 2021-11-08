@@ -13,9 +13,9 @@ console.log('Hello! Enter your text:');
 const rl = readline.createInterface({ input: stdin, output });
 
 rl.on('line', (text) => {
-  if (text.trim() === 'exit') {
+  if (text.trim().toLowerCase() === 'exit') {
     console.log('\nGood luck learning Node.js!');
-    rl.close();
+    process.exit();
   }
   output.write(`${text}\n`);
 });
