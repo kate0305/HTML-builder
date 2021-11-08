@@ -49,7 +49,7 @@ async function createFileHTML() {
       const templateName = path.basename(component.name, path.extname(component.name));
       if (component.isFile() && fileExtension === 'html') {
         component = await readFile(pathComponent);
-        template = template.replace(`{{${templateName}}}`, component);
+        template = template.replace(new RegExp(`{{${templateName}}}`, 'g'), component);
       }
     }
     await writeFile(pathProjectHTML, template);
