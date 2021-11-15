@@ -75,8 +75,11 @@ async function createFileStyle() {
   }
 }
 
-createProjectDir();
-copyDir(pathAssets, pathProjectAssets);
-createFileHTML();
-createFileStyle();
+async function start() {
+  await createProjectDir();
+  copyDir(pathAssets, pathProjectAssets);
+  createFileHTML();
+  createFileStyle();
+}
 
+start();
